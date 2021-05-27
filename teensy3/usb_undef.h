@@ -299,6 +299,21 @@
 #ifdef MTP_EVENT_INTERVAL
 #undef MTP_EVENT_INTERVAL
 #endif
+#ifdef NKRO_INTERFACE
+#undef NKRO_INTERFACE
+#endif
+#ifdef NKRO_ENDPOINT
+#undef NKRO_ENDPOINT
+#endif
+#ifdef NKRO_SIZE
+#undef NKRO_SIZE
+#endif
+#ifdef NKRO_REPORT_KEYS
+#undef NKRO_REPORT_KEYS
+#endif
+#ifdef NKRO_INTERVAL
+#undef NKRO_INTERVAL
+#endif
 #ifdef ENDPOINT1_CONFIG
 #undef ENDPOINT1_CONFIG
 #endif
@@ -343,5 +358,8 @@
 #endif
 #ifdef ENDPOINT15_CONFIG
 #undef ENDPOINT15_CONFIG
+#endif
+#ifdef ENDPOINT16_CONFIG
+#undef ENDPOINT16_CONFIG
 #endif
 

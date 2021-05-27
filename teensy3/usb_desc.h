@@ -229,9 +229,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d'}
   #define PRODUCT_NAME_LEN	8
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         4
+  #define NUM_ENDPOINTS         5
   #define NUM_USB_BUFFERS	14
-  #define NUM_INTERFACE		3
+  #define NUM_INTERFACE		4
   #define SEREMU_INTERFACE      1	// Serial emulation
   #define SEREMU_TX_ENDPOINT    1
   #define SEREMU_TX_SIZE        64
@@ -247,6 +247,11 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define KEYMEDIA_ENDPOINT     4
   #define KEYMEDIA_SIZE         8
   #define KEYMEDIA_INTERVAL     4
+  #define NKRO_INTERFACE        6  // N-key rollover kbd
+  #define NKRO_ENDPOINT         5
+  #define NKRO_SIZE             32
+  #define NKRO_REPORT_KEYS      ( NKRO_SIZE - 1 )
+  #define NKRO_INTERVAL         1
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_ONLY
@@ -262,9 +267,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','J','o','y','s','t','i','c','k'}
   #define PRODUCT_NAME_LEN	23
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         6
+  #define NUM_ENDPOINTS         7
   #define NUM_USB_BUFFERS	24
-  #define NUM_INTERFACE		5
+  #define NUM_INTERFACE		6
   #define SEREMU_INTERFACE      2	// Serial emulation
   #define SEREMU_TX_ENDPOINT    1
   #define SEREMU_TX_SIZE        64
@@ -288,12 +293,18 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define JOYSTICK_ENDPOINT     4
   #define JOYSTICK_SIZE         12	//  12 = normal, 64 = extreme joystick
   #define JOYSTICK_INTERVAL     2
+  #define NKRO_INTERFACE        5  // N-key rollover kbd
+  #define NKRO_ENDPOINT         7
+  #define NKRO_SIZE             32
+  #define NKRO_REPORT_KEYS      ( NKRO_SIZE - 1 )
+  #define NKRO_INTERVAL         1
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_ONLY
+  #define ENDPOINT7_CONFIG	ENDPOINT_TRANSMIT_ONLY
 
 #elif defined(USB_SERIAL_HID)
   #define VENDOR_ID		0x16C0
@@ -306,9 +317,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'S','e','r','i','a','l','/','K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','J','o','y','s','t','i','c','k'}
   #define PRODUCT_NAME_LEN	30
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS		7
+  #define NUM_ENDPOINTS		8
   #define NUM_USB_BUFFERS	30
-  #define NUM_INTERFACE		6
+  #define NUM_INTERFACE		7
   #define CDC_IAD_DESCRIPTOR	1
   #define CDC_STATUS_INTERFACE	0
   #define CDC_DATA_INTERFACE	1	// Serial
@@ -334,13 +345,19 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define JOYSTICK_ENDPOINT     6
   #define JOYSTICK_SIZE         12	//  12 = normal, 64 = extreme joystick
   #define JOYSTICK_INTERVAL     1
+  #define NKRO_INTERFACE        6  // N-key rollover kbd
+  #define NKRO_ENDPOINT         8
+  #define NKRO_SIZE             32
+  #define NKRO_REPORT_KEYS      ( NKRO_SIZE - 1 )
+  #define NKRO_INTERVAL         1
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_ONLY
-  #define ENDPOINT7_CONFIG	ENDPOINT_TRANSMIT_ONLY
+  #define ENDPOINT7_CONFIG	ENDPOINT_TRANSMIT_ONLY  
+  #define ENDPOINT8_CONFIG	ENDPOINT_TRANSMIT_ONLY
 
 #elif defined(USB_TOUCHSCREEN)
   #define VENDOR_ID		0x16C0
@@ -350,9 +367,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','T','o','u','c','h','s','c','r','e','e','n'}
   #define PRODUCT_NAME_LEN	20
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         5
+  #define NUM_ENDPOINTS         6
   #define NUM_USB_BUFFERS	15
-  #define NUM_INTERFACE		4
+  #define NUM_INTERFACE		5
   #define SEREMU_INTERFACE      1	// Serial emulation
   #define SEREMU_TX_ENDPOINT    1
   #define SEREMU_TX_SIZE        64
@@ -372,11 +389,17 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define MULTITOUCH_ENDPOINT   5
   #define MULTITOUCH_SIZE       16
   #define MULTITOUCH_FINGERS    10
+  #define NKRO_INTERFACE        4  // N-key rollover kbd
+  #define NKRO_ENDPOINT         6
+  #define NKRO_SIZE             32
+  #define NKRO_REPORT_KEYS      ( NKRO_SIZE - 1 )
+  #define NKRO_INTERVAL         1
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSMIT_ONLY
+  #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_ONLY
 
 #elif defined(USB_HID_TOUCHSCREEN)
   #define VENDOR_ID		0x16C0
@@ -386,9 +409,9 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define PRODUCT_NAME		{'K','e','y','b','o','a','r','d','/','M','o','u','s','e','/','T','o','u','c','h','s','c','r','e','e','n'}
   #define PRODUCT_NAME_LEN	26
   #define EP0_SIZE		64
-  #define NUM_ENDPOINTS         6
+  #define NUM_ENDPOINTS         7
   #define NUM_USB_BUFFERS	20
-  #define NUM_INTERFACE		5
+  #define NUM_INTERFACE		6
   #define SEREMU_INTERFACE      2	// Serial emulation
   #define SEREMU_TX_ENDPOINT    1
   #define SEREMU_TX_SIZE        64
@@ -412,12 +435,18 @@ let me know?  http://forum.pjrc.com/forums/4-Suggestions-amp-Bug-Reports
   #define MULTITOUCH_ENDPOINT   5
   #define MULTITOUCH_SIZE       16
   #define MULTITOUCH_FINGERS    10
+  #define NKRO_INTERFACE        5  // N-key rollover kbd
+  #define NKRO_ENDPOINT         7
+  #define NKRO_SIZE             32
+  #define NKRO_REPORT_KEYS      ( NKRO_SIZE - 1 )
+  #define NKRO_INTERVAL         1
   #define ENDPOINT1_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT2_CONFIG	ENDPOINT_RECEIVE_ONLY
   #define ENDPOINT3_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT4_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT5_CONFIG	ENDPOINT_TRANSMIT_ONLY
   #define ENDPOINT6_CONFIG	ENDPOINT_TRANSMIT_ONLY
+  #define ENDPOINT7_CONFIG	ENDPOINT_TRANSMIT_ONLY
 
 #elif defined(USB_MIDI)
   #define VENDOR_ID		0x16C0

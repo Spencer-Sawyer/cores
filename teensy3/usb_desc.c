@@ -187,6 +187,32 @@ static uint8_t keymedia_report_desc[] = {
         0xC0                            // End Collection
 };
 #endif
+#ifdef NKRO_INTERFACE
+static uint8_t nkro_hid_report_desc[] = {
+        0x05, 0x01, // Usage Page (Generic Desktop),
+        0x09, 0x06, // Usage (Keyboard),
+        0xA1, 0x01, // Collection (Application),
+        // bitmap of modifiers
+        0x75, 0x01, // Report Size (1),
+        0x95, 0x08, // Report Count (8),
+        0x05, 0x07, // Usage Page (Key Codes),
+        0x19, 0xE0, // Usage Minimum (224),
+        0x29, 0xE7, // Usage Maximum (231),
+        0x15, 0x00, // Logical Minimum (0),
+        0x25, 0x01, // Logical Maximum (1),
+        0x81, 0x02, // Input (Data, Variable, Absolute), ;Modifier byte
+        // bitmap of keys
+        0x95, NKRO_REPORT_KEYS*8, // Report Count (),
+        0x75, 0x01, // Report Size (1),
+        0x15, 0x00, // Logical Minimum (0),
+        0x25, 0x01, // Logical Maximum(1),
+        0x05, 0x07, // Usage Page (Key Codes),
+        0x19, 0x00, // Usage Minimum (0),
+        0x29, NKRO_REPORT_KEYS*8-1, // Usage Maximum (),
+        0x81, 0x02, // Input (Data, Variable, Absolute),
+        0xc0 // End Collection
+};
+#endif
 
 #ifdef MOUSE_INTERFACE
 // Mouse Protocol 1, HID 1.11 spec, Appendix B, page 59-60, with wheel extension
@@ -561,7 +587,15 @@ static uint8_t flightsim_report_desc[] = {
 #define JOYSTICK_INTERFACE_DESC_SIZE	0
 #endif
 
-#define MTP_INTERFACE_DESC_POS		JOYSTICK_INTERFACE_DESC_POS+JOYSTICK_INTERFACE_DESC_SIZE
+#define NKRO_INTERFACE_DESC_POS    JOYSTICK_INTERFACE_DESC_POS+JOYSTICK_INTERFACE_DESC_SIZE
+#ifdef NKRO_INTERFACE
+#define NKRO_INTERFACE_DESC_SIZE 9+9+7
+#define NKRO_DESC_OFFSET NKRO_INTERFACE_DESC_POS+9
+#else
+#define NKRO_INTERFACE_DESC_SIZE 0
+#endif
+
+#define MTP_INTERFACE_DESC_POS     NKRO_INTERFACE_DESC_POS+NKRO_INTERFACE_DESC_SIZE
 #ifdef  MTP_INTERFACE
 #define MTP_INTERFACE_DESC_SIZE		9+7+7+7
 #else
@@ -1259,6 +1293,34 @@ static uint8_t config_descriptor[CONFIG_DESC_SIZE] = {
         JOYSTICK_SIZE, 0,                       // wMaxPacketSize
         JOYSTICK_INTERVAL,                      // bInterval
 #endif // JOYSTICK_INTERFACE
+#ifdef NKRO_INTERFACE
+        // interface descriptor, USB spec 9.6.5, page 267-269, Table 9-12
+        9, // bLength
+        4, // bDescriptorType
+        NKRO_INTERFACE, // bInterfaceNumber
+        0, // bAlternateSetting
+        1, // bNumEndpoints
+        0x03, // bInterfaceClass (0x03 = HID)
+        0x00, // bInterfaceSubClass (0x01 = Boot)
+        0x00, // bInterfaceProtocol (0x01 = Keyboard)
+        0, // iInterface
+        // HID interface descriptor, HID 1.11 spec, section 6.2.1
+        9, // bLength
+        0x21, // bDescriptorType
+        0x11, 0x01, // bcdHID
+        0, // bCountryCode
+        1, // bNumDescriptors
+        0x22, // bDescriptorType
+        LSB(sizeof(nkro_hid_report_desc)), // wDescriptorLength
+        MSB(sizeof(nkro_hid_report_desc)),
+        // endpoint descriptor, USB spec 9.6.6, page 269-271, Table 9-13
+        7, // bLength
+        5, // bDescriptorType
+        NKRO_ENDPOINT | 0x80, // bEndpointAddress
+        0x03, // bmAttributes (0x03=intr)
+        NKRO_SIZE, 0, // wMaxPacketSize
+        NKRO_INTERVAL, // bInterval
+#endif // NKRO_INTERFACE
 
 #ifdef MTP_INTERFACE
         // interface descriptor, USB spec 9.6.5, page 267-269, Table 9-12
@@ -1863,6 +1925,10 @@ const usb_descriptor_list_t usb_descriptor_list[] = {
 #ifdef JOYSTICK_INTERFACE
         {0x2200, JOYSTICK_INTERFACE, joystick_report_desc, sizeof(joystick_report_desc)},
         {0x2100, JOYSTICK_INTERFACE, config_descriptor+JOYSTICK_HID_DESC_OFFSET, 9},
+#endif
+#ifdef NKRO_INTERFACE
+        {0x2200, NKRO_INTERFACE, nkro_hid_report_desc, sizeof(nkro_hid_report_desc)},
+        {0x2100, NKRO_INTERFACE, config_descriptor+NKRO_DESC_OFFSET, 9},
 #endif
 #ifdef RAWHID_INTERFACE
 	{0x2200, RAWHID_INTERFACE, rawhid_report_desc, sizeof(rawhid_report_desc)},

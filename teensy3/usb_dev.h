@@ -82,6 +82,13 @@ extern uint8_t keyboard_idle_count;
 extern volatile uint8_t keyboard_leds;
 #endif
 
+#ifdef NKRO_INTERFACE
+extern uint8_t nkro_report_data[NKRO_SIZE];
+extern uint8_t nkro_protocol;
+extern uint8_t nkro_idle_config;
+extern uint8_t nkro_idle_count;
+#endif
+
 #ifdef MIDI_INTERFACE
 extern void usb_midi_flush_output(void);
 #endif

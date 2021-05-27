@@ -84,6 +84,10 @@ uint8_t usb_joystick_class::manual_mode = 0;
 usb_serial_class Serial;
 #endif
 
+#ifdef NKRO_INTERFACE
+usb_nkro_class Nkro;
+#endif
+
 
 #else // F_CPU < 20 MHz
 
