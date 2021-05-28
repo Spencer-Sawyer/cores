@@ -359,7 +359,5 @@
 #ifdef ENDPOINT15_CONFIG
 #undef ENDPOINT15_CONFIG
 #endif
-#ifdef ENDPOINT16_CONFIG
-#undef ENDPOINT16_CONFIG
-#endif
+
 
